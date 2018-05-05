@@ -3,8 +3,8 @@ const initialState = {
     page: 0
 };
 
-export default function entries(stata = initialState, action) {
+export default function projects(stata = initialState, action) {
     switch (action.type) {
-        case 'LOAD_ENTRIES':
+        case 'LOAD_PROJECTS':
     }
 }
