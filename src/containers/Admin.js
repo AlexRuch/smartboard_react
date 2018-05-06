@@ -1,8 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ProjectsListComponent from '../components/admin/projectsList';
+import { loadProjects } from '../actions/projects';
+import { connect } from 'react-redux';
 
-export default class Admin extends React.Component{
+class Admin extends React.Component {
 
-    render(){
+    componentDidMount() {
+        this.props.loadProjects();
+    }
+
+    render() {
+        console.log(this.props.projectsList)
+        return (
+            <ProjectsListComponent projectsList={this.props.projectsList}/>
+        );
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        projectsList: state.projects.projectsList
+    }
+
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        loadProjects: () => {
+            dispatch(loadProjects())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Admin);

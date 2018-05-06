@@ -1,0 +1,68 @@
+@import "./normalize.css";
+
+body {
+    background-color: #efefef;
+}
+
+.projects__list {
+    width: 1200px;
+    font-family: 'PT Sans', Arial, sans-serif;
+    margin: 30px auto auto;
+}
+
+.proj-list__item {
+    display: flex;
+    justify-content: space-between;
+    min-height: 110px;
+    margin-top: 14px;
+    padding: 40px 50px 25px;
+    background-color: #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000000;
+}
+
+.proj-list__item:hover {
+    -webkit-box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.proj-list__create {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'PT Sans', Arial, sans-serif;
+}
+
+.proj-list__left {
+    margin-right: 100px;
+}
+
+.proj-list__title {
+    font-size: 32px;
+    padding-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.proj-list__description {
+    font-size: 20px;
+    line-height: 25px;
+    padding-bottom: 15px;
+}
+
+.projects__navigation {
+    padding-top: 40px;
+    display: flex;
+    width: 1200px;
+    margin: auto;
+}
+
+
+.projects__navigation p{
+    margin-right: 20px;
+}
+
+
+.projects__navigation button{
+    margin-right: 20px;
+}

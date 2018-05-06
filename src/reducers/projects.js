@@ -1,10 +1,16 @@
 const initialState = {
-    entryList: [],
+    projectsList: [],
     page: 0
 };
 
-export default function projects(stata = initialState, action) {
+export default function projects(state = initialState, action) {
     switch (action.type) {
-        case 'LOAD_PROJECTS':
+        case 'LOAD_ALL_PROJECTS':
+            console.log(action.payload.projects);
+            return {
+                projectsList: action.payload.projects
+            };
+        default:
+            return state;
     }
 }
