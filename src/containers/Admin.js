@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import ProjectsListComponent from '../components/admin/projectsList';
-import { loadProjects } from '../actions/projects';
 import { connect } from 'react-redux';
+import { loadProjects } from '../actions/projects';
+
 
 class Admin extends React.Component {
 
-    componentDidMount() {
+    componentDidMount(){
         this.props.loadProjects();
     }
 
