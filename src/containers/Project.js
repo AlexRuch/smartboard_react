@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import EntriesList from '../components/project/entriesList';
+import EntryPreview from '../components/project/entryPreview';
 
 class Project extends React.Component {
     render() {
@@ -8,7 +10,15 @@ class Project extends React.Component {
             this.props.projectsList.map(e => console.log(e));
             console.log(this.props.match.params.projectId);
             console.log(project);
-            return(<p>{project.projectName}</p>);
+            return(
+                <section className="project">
+                    <h1 className="project__name">{ project.projectName }</h1>
+                    <div class="project__slide slide">
+                        <EntriesList entriesList={ project.entryList }/>
+                        <EntryPreview />
+                    </div>
+                </section>
+            );
         }
     }
 }

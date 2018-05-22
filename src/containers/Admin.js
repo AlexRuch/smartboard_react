@@ -1,7 +1,7 @@
 import React from 'react';
 import ProjectsListComponent from '../components/admin/projectsList';
 import { connect } from 'react-redux';
-import { loadProjects } from '../actions/projects';
+import { loadProjects, createProject, sortByCreate, sortByUpdate } from '../actions/projects';
 
 
 class Admin extends React.Component {
@@ -11,9 +11,12 @@ class Admin extends React.Component {
     }
 
     render() {
-        console.log(this.props.projectsList)
+        
         return (
-            <ProjectsListComponent projectsList={this.props.projectsList}/>
+            <ProjectsListComponent projectsList={this.props.projectsList}
+                                   createProject={(projectName) => this.props.createProject(projectName)}
+                                   sortByCreate={() => this.props.sortByCreate()}
+                                   sortByUpdate={() => this.props.sortByUpdate()}/>
         );
     }
 }
@@ -29,6 +32,15 @@ function mapDispatchToProps(dispatch) {
     return {
         loadProjects: () => {
             dispatch(loadProjects())
+        },
+        createProject: (projectName) => {
+            dispatch(createProject(projectName));
+        },
+        sortByCreate: () => {
+            dispatch(sortByCreate());
+        },
+        sortByUpdate: () => {
+            dispatch(sortByUpdate());
         }
     }
 }

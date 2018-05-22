@@ -2,12 +2,26 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default class Projects extends React.Component {
-    render() {
-        const projectsList = this.props.projectsList;
-        let projects = '';
 
-        if (projectsList !== undefined && projectsList.length > 0) {
-            projects = projectsList.map(project => 
+    constructor(props) {
+        super(props);
+        this.state = {
+            newProjectName: ''
+        };
+        this.createProject = this.createProject.bind(this);
+        this.changeHandler = this.changeHandler.bind(this);
+    }
+
+    createProject(){
+        this.props.createProject(this.state.newProjectName);
+    }
+
+    changeHandler(e) {
+        this.setState({[e.target.name]: e.target.value});       
+    }
+    render() {
+       
+        const projects = this.props.projectsList.map(project => 
                 <li> 
                     <Link to={ '/admin/project/' + project.projectId } className="proj-list__item">
                         <div className="proj-list__left">
@@ -21,17 +35,17 @@ export default class Projects extends React.Component {
                     </Link>
                 </li>
             );
-        }
-        console.log(this.props.projects);
 
         return (
             <section className="projects">
                 <div className="projects__navigation">
                     <p>Сортировать по дате: </p>
-                    <button className="btn_sort">Создания</button>
-                    <button className="btn_sort">Редактирования</button>
+                    <button className="btn_sort" onClick={this.props.sortByCreate}>Создания</button>
+                    <button className="btn_sort" onClick={this.props.sortByUpdate}>Редактирования</button>
                     <p>Поиск по названию: </p>
                     <input type="text"/>
+                    <input type='text' name='newProjectName' onChange={this.changeHandler} value={this.props.newProjectName}/>
+                    <button onClick={this.createProject}>Создать проект</button>
                 </div>
                 <ul className="projects__list proj-list">
                     { projects }
