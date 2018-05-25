@@ -10,6 +10,15 @@ export const loadProjects = () => dispatch => {
     });
 };
 
+export const loadProject = (projectId) => dispatch =>{
+    console.log('ACTION!');
+    axios.get('http://localhost:8080/api/project/' + projectId).then(response =>{
+        dispatch({
+            type: 'LOAD_PROJECT',
+            payload: {project: response.data}
+        });
+    });
+}
 
 export const changeEntryPosition = (project_id, entry_id, change_type) => dispatch => {
     const data = JSON.stringify({
@@ -17,7 +26,13 @@ export const changeEntryPosition = (project_id, entry_id, change_type) => dispat
         entryId: entry_id,
         changeType: change_type
     });
-    axios.put('http://localhost:8080/api/project/update/position', data).then(response => {
+    console.log(data);
+    axios.put('http://localhost:8080/api/project/update/position', data, {
+        headers:{
+            'Access-Control-Allow-Origin':'*',
+            'Content-Type': 'text/javascript'
+        }
+    }).then(response => {
         dispatch({
             type: 'UPDATE_PROJECTS_ENTRIES_POSITION',
             payload: {project: response.data}

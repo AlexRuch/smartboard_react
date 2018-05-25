@@ -1,19 +1,30 @@
 const initialState = {
     projectsList: [],
-    page: 0
+    page: 0,
+    project: 'loooool',
+    entryList:''
 };
 
 export default function projects(state = initialState, action) {
     switch (action.type) {
         case 'LOAD_ALL_PROJECTS':
-            const sortByCreate = action.payload.projects.sort(compareByCreate);
+            const sortByCreate = action.payload.projects.slice().sort(compareByCreate);
             return {
                 projectsList: sortByCreate
             };
-        case 'UPDATE_PROJECTS_ENTRIES_POSITION':
-            const updatedList = state.projectList.filter(project => project.projectId !== action.payload.projectId).push(action.payload);
+        case 'LOAD_PROJECT':
+            console.log(action.payload.project);
+
             return{
-                projectsList: updatedList
+                projectsList: state.projectsList,
+                project: action.payload.project,
+                entryList: action.payload.project.entryList.sort(comparsoinByPosition)
+            };
+        case 'UPDATE_PROJECTS_ENTRIES_POSITION':
+            console.log(action.payload);
+            return{
+                project: state.project,
+                entryList: action.payload.project.entryList.slice().sort(comparsoinByPosition)
             };
         case 'ADD_NEW_PROJECT':
             return {
@@ -62,4 +73,19 @@ function compareByUpdate(a, b) {
     }
 
     return comparsoin;
+}
+
+function comparsoinByPosition(a, b) {
+    const positionA = a.entryPosition;
+    const positionB = b.entryPosition;
+
+    let comparsoin = 0;
+
+    if (positionA > positionB) {
+        comparsoin = 1;
+    } else if (positionA < positionB){
+        comparsoin = -1;
+    }
+
+    return comparsoin;   
 }

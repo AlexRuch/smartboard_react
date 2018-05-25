@@ -2,31 +2,46 @@ import React from 'react';
 import { connect } from 'react-redux';
 import EntriesList from '../components/project/entriesList';
 import EntryPreview from '../components/project/entryPreview';
+import {changeEntryPosition, loadProject} from '../actions/projects.js';
 
 class Project extends React.Component {
+
+    componentDidMount(){
+        this.props.loadProject(this.props.match.params.projectId);
+    }
+
     render() {
-        if(this.props.projectsList.length !== 0){
-            const project = (this.props.projectsList.filter(proj => parseInt(proj.projectId, 10) === parseInt(this.props.match.params.projectId, 10))[0]);
-            this.props.projectsList.map(e => console.log(e));
-            console.log(this.props.match.params.projectId);
-            console.log(project);
+        console.log(this.props.entryList);
             return(
                 <section className="project">
-                    <h1 className="project__name">{ project.projectName }</h1>
-                    <div class="project__slide slide">
-                        <EntriesList entriesList={ project.entryList }/>
+                    <h1 className="project__name"></h1>
+                    <div className="project__slide slide">
+                        <EntriesList entriesList={ this.props.entryList }
+                            changePosition={ (project_id, entry_id, change_type) => this.props.changeEntryPosition(project_id, entry_id, change_type) }
+                            project= {this.props.project}/>
                         <EntryPreview />
                     </div>
                 </section>
             );
         }
     }
-}
 
 function mapStateToProps(state) {
     return {
-        projectsList: state.projects.projectsList
+        project: state.projects.project,
+        entryList: state.projects.entryList
     }
 }
 
-export default connect(mapStateToProps)(Project);
+function mapDispatchToProps(dispatch) {
+    return {
+        changeEntryPosition: (project_id, entry_id, change_type) => {
+            dispatch(changeEntryPosition(project_id, entry_id, change_type))
+        },
+        loadProject: (projectId) => {
+            dispatch(loadProject(projectId))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Project);
