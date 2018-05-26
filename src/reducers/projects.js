@@ -13,18 +13,10 @@ export default function projects(state = initialState, action) {
                 projectsList: sortByCreate
             };
         case 'LOAD_PROJECT':
-            console.log(action.payload.project);
-
-            return{
+            return {
                 projectsList: state.projectsList,
                 project: action.payload.project,
                 entryList: action.payload.project.entryList.sort(comparsoinByPosition)
-            };
-        case 'UPDATE_PROJECTS_ENTRIES_POSITION':
-            console.log(action.payload);
-            return{
-                project: state.project,
-                entryList: action.payload.project.entryList.slice().sort(comparsoinByPosition)
             };
         case 'ADD_NEW_PROJECT':
             return {

@@ -513,6 +513,7 @@ img {
 
 .slide__description{
     display: flex;
+    justify-content: space-between;
     margin-right: 10px;
     border: var(--border);
     border-radius: 3px;
@@ -559,6 +560,11 @@ img {
 .slide__arrow:hover{
     border-color: var(--add-color);
     color: var(--add-color);
+}
+
+.slide__arrow--delete{
+    border: solid 1px red;
+    color: red;
 }
 
 .add {
