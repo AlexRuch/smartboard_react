@@ -133,7 +133,6 @@ export const addTable = (project_id, entry_name, table_css, table_rows) => dispa
 }
 
 export const deleteEntry = ( entry_id ) => dispatch => {
-    console.log('ENTRY ID: ' + entry_id);
     axios.put(SERVER_ADDRESS + '/entry', entry_id, {
          headers:{
             'Access-Control-Allow-Origin':'*',
@@ -146,5 +145,14 @@ export const deleteEntry = ( entry_id ) => dispatch => {
                 project: response.data
             }
         });
+    });
+}
+
+export const setCurrentEntry = (entry_id) => dispatch => {
+    dispatch({
+        type: 'SET_CURRENT_ENTRY',
+        payload: {
+            entryId: entry_id
+        }
     });
 }

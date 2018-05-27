@@ -6,7 +6,7 @@ import ProjectHeader from '../components/project/projectHeader';
 import TextEditor from '../components/project/textEditor';
 import TeableEditor from '../components/project/tableEditor';
 import ImageEditor from '../components/project/imageEditor';
-import { changeEntryPosition, loadProject, addText, addImage, addTable, deleteEntry } from '../actions/projects.js';
+import { changeEntryPosition, loadProject, addText, addImage, addTable, deleteEntry, setCurrentEntry } from '../actions/projects.js';
 
 class Project extends React.Component {
 
@@ -23,8 +23,9 @@ class Project extends React.Component {
                             <EntriesList entriesList={ this.props.entryList }
                                 changePosition={ (project_id, entry_id, change_type) => this.props.changeEntryPosition(project_id, entry_id, change_type) }
                                 project={ this.props.project }
-                                deleteEntry={ (entry_id) => this.props.deleteEntry(entry_id) }/>
-                            <EntryPreview />
+                                deleteEntry={ (entry_id) => this.props.deleteEntry(entry_id) }
+                                setCurrentEntry={(entry_id) => this.props.setCurrentEntry(entry_id)}/>
+                            <EntryPreview currentEntry={this.props.currentEntry}/>
                         </div>
                     </section>
                     <div className='add'>
@@ -52,7 +53,8 @@ class Project extends React.Component {
 function mapStateToProps(state) {
     return {
         project: state.projects.project,
-        entryList: state.projects.entryList
+        entryList: state.projects.entryList,
+        currentEntry: state.projects.currentEntry
     }
 }
 
@@ -75,6 +77,9 @@ function mapDispatchToProps(dispatch) {
         },
         deleteEntry: (entry_id) => {
             dispatch(deleteEntry(entry_id))
+        },
+        setCurrentEntry: (entry_id) => {
+            dispatch(setCurrentEntry(entry_id))
         }
     }
 }

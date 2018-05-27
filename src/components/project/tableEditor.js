@@ -36,6 +36,13 @@ export default class TeableEditor extends React.Component {
         }
 
         this.props.addTable(this.props.project.projectId, this.state.entryName, this.state.tableCSS, rowList);
+        this.setState({entryName: ''});
+        this.setState({tableCSS: ''});
+        const wrapper  = document.querySelector('.row__wrapper');
+        while (wrapper.firstChild) {
+                wrapper.removeChild(wrapper.firstChild);
+
+        }
     }
     render() {
         return(
@@ -47,7 +54,7 @@ export default class TeableEditor extends React.Component {
                     </label>
                     <label className="form__item">
                         <span className="form__label">CSS</span>
-                        <textarea className="form__textarea" name="tableCSS" rows="10" placeholder="CSS" onChange={this.changeHandler} value={this.state.tableCSS}></textarea>
+                        <textarea className="form__textarea" name="tableCSS" rows="10" placeholder="ul class = slide__table" onChange={this.changeHandler} value={this.state.tableCSS}></textarea>
                     </label>
                     <div className='row__wrapper'></div>
                     <button className="form__add-row" type="button" onClick={this.addRow}>Добавить строку</button>

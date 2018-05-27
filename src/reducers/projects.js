@@ -2,7 +2,8 @@ const initialState = {
     projectsList: [],
     page: 0,
     project: 'loooool',
-    entryList:''
+    entryList:'',
+    currentEntry: ''
 };
 
 export default function projects(state = initialState, action) {
@@ -31,7 +32,14 @@ export default function projects(state = initialState, action) {
                 projectsList: state.projectsList.slice().sort(compareByUpdate)
  
             };
-            
+        case 'SET_CURRENT_ENTRY':
+            console.log('ENTRY: ' +action.payload.entryId);
+            return {
+                projectsList: state.projectsList,
+                project: state.project,
+                entryList: state.entryList,
+                currentEntry: state.entryList.filter(e => e.entryId == action.payload.entryId)[0]
+            }
         default:
             return state;
     }

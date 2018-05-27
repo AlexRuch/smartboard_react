@@ -6,6 +6,7 @@ export default class EntriesList extends React.Component {
         super(props);
         this.editEntryPosition = this.editEntryPosition.bind(this);
         this.deleteEntry = this.deleteEntry.bind(this);
+        this.setCurrentEntry = this.setCurrentEntry.bind(this);
     }
 
     editEntryPosition(e) {
@@ -13,12 +14,14 @@ export default class EntriesList extends React.Component {
         this.props.changePosition(this.props.project.projectId, e.target.name, e.target.value);
     }
 
-    deleteEntry(e){
+    deleteEntry(e) {
         console.log(e.target);
         this.props.deleteEntry(e.target.id);
     }
 
-    
+    setCurrentEntry(e) {
+        this.props.setCurrentEntry(e.target.id);
+    } 
 
     render() {
         const entriesList = this.props.entriesList;
@@ -29,14 +32,14 @@ export default class EntriesList extends React.Component {
                 if(entry.entryPosition === 1){
                     if(entriesList.length === 1){
                         return(
-                            <div key={entry.entryId} className="slide__description slide__description--active">
+                            <div key={entry.entryId} id={entry.entryId} onClick={this.setCurrentEntry} className="slide__description slide__description--active">
                                 <p className="slide__name">{ entry.name }</p>
                                 <button id={entry.entryId} className="slide__arrow slide__arrow--delete" name={ entry.entryPosition } value='DELETE' onClick={ this.deleteEntry }>X</button>
                             </div>
                         );
                     } else {
                     return(
-                            <div key={entry.entryId} className="slide__description slide__description--active">
+                            <div key={entry.entryId} id={entry.entryId} onClick={this.setCurrentEntry} className="slide__description slide__description--active">
                                 <div className="slide__controls">
                                     <button className="slide__arrow slide__arrow--down" name={ entry.entryPosition } value='DOWN' onClick={ this.editEntryPosition }>&#11015;</button>
                                 </div>
@@ -47,7 +50,7 @@ export default class EntriesList extends React.Component {
                     }
                 } else if(entry.entryPosition === entriesList.length){
                     return(
-                        <div key={entry.entryId} className="slide__description">
+                        <div key={entry.entryId} id={entry.entryId} onClick={this.setCurrentEntry} className="slide__description">
                             <div className="slide__controls">
                                 <button className="slide__arrow slide__arrow--up" name={ entry.entryPosition } value='UP' onClick={ this.editEntryPosition }>&#11014;</button>
                             </div>
@@ -57,7 +60,7 @@ export default class EntriesList extends React.Component {
                     );
                 } else {
                     return(
-                        <div key={entry.entryId} className="slide__description">
+                        <div key={entry.entryId} id={entry.entryId} onClick={this.setCurrentEntry} className="slide__description">
                             <div className="slide__controls">
                                 <button className="slide__arrow slide__arrow--up" name={ entry.entryPosition } value='UP' onClick={ this.editEntryPosition }>&#11014;</button>
                                 <button className="slide__arrow slide__arrow--down" name={ entry.entryPosition } value='DOWN' onClick={ this.editEntryPosition }>&#11015;</button>

@@ -794,3 +794,29 @@ body {
 .projects__navigation button{
     margin-right: 20px;
 }
+
+
+
+.slide__text{
+    text-align: center;
+    font-size: 36px;
+    width: 600px;
+    min-height: 400px;
+}
+
+.slide__table {
+    text-align: center;
+    width: 600px;
+    font-size: 36px;
+}
+
+.slide__table li:nth-child(2n + 1){
+    background-color: #AAAAFF;
+}
+               
+.slide__clear{
+    text-align: center;
+    font-size: 48px;
+    width: 600px;
+    min-height: 400px;
+}
