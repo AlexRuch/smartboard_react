@@ -3,7 +3,9 @@ const initialState = {
     page: 0,
     project: 'loooool',
     entryList:'',
-    currentEntry: ''
+    currentEntry: '',
+    enableProject: '',
+    boardEntry: 0
 };
 
 export default function projects(state = initialState, action) {
@@ -33,12 +35,40 @@ export default function projects(state = initialState, action) {
  
             };
         case 'SET_CURRENT_ENTRY':
-            console.log('ENTRY: ' +action.payload.entryId);
             return {
                 projectsList: state.projectsList,
                 project: state.project,
                 entryList: state.entryList,
-                currentEntry: state.entryList.filter(e => e.entryId == action.payload.entryId)[0]
+                currentEntry: state.entryList.filter(e => parseInt(e.entryId, 10) === parseInt(action.payload.entryId, 10))[0]
+            }
+
+        case 'LOAD_ENABLE_PROJECT':
+            return {
+                projectsList: state.projectsList,
+                project: state.project,
+                entryList:  action.payload.project.entryList.sort(comparsoinByPosition),
+                currentEntry: state.currentEntry,
+                enableProject: action.payload.project,
+                boardEntry: state.boardEntry
+            }
+        case 'CHANGE_BOARD_ENTRY':
+            return {
+                projectsList: state.projectsList,
+                project: state.project,
+                entryList: state.entryList,
+                currentEntry: state.currentEntry,
+                enableProject: state.enableProject,
+                boardEntry: action.payload.entryIndex
+            }
+
+        case 'SET_DEFAULT_ENTRY':
+            return {
+                projectsList: state.projectsList,
+                project: state.project,
+                entryList: state.entryList,
+                currentEntry: state.currentEntry,
+                enableProject: state.enableProject,
+                boardEntry: 0
             }
         default:
             return state;

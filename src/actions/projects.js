@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const SERVER_ADDRESS = 'http://localhost:8080/api';
+const SERVER_ADDRESS = 'http://192.168.10.126:8080/api';
 
 export const loadProjects = () => dispatch => {
     axios.get(SERVER_ADDRESS + '/project/all').then(response => {
@@ -40,8 +40,9 @@ export const changeEntryPosition = (project_id, entry_id, change_type) => dispat
 }
 
 export const createProject = ( projectName ) => dispatch => {
-    axios.post(SERVER_ADDRESS + '/project', projectName, {headers:{
-        'Content-Type': 'text/javascript'
+    axios.post(SERVER_ADDRESS + '/project', projectName, {
+        headers:{
+            'Content-Type': 'text/javascript'
         }
     }).then(response => {
         console.log(response.data);
@@ -51,6 +52,19 @@ export const createProject = ( projectName ) => dispatch => {
         });
     });    
 };
+
+export const deleteProject = ( projectId ) => dispatch => {
+    axios.put(SERVER_ADDRESS + '/project', projectId, {
+        headers:{
+            'Content-Type': 'text/plain'
+        }
+    }).then(response => {
+        dispatch({
+            type: 'LOAD_ALL_PROJECTS',
+            payload: {projects: response.data}
+        });
+    });
+}
 
 export const sortByCreate = () => dispatch => {
     dispatch({
@@ -153,6 +167,38 @@ export const setCurrentEntry = (entry_id) => dispatch => {
         type: 'SET_CURRENT_ENTRY',
         payload: {
             entryId: entry_id
+        }
+    });
+}
+
+
+export const loadEnableProject = ( project ) => dispatch => {
+    dispatch({
+        type: 'LOAD_ENABLE_PROJECT',
+        payload: {
+            project: project
+        }
+    });
+}
+
+export const changeBoardEntry = (entryIndex) => dispatch => {
+    dispatch({
+        type: 'CHANGE_BOARD_ENTRY',
+        payload: {
+            entryIndex: entryIndex
+        } 
+    });
+}
+
+export const setDefaultEntry = () => dispatch => {
+    dispatch({
+        type: 'SET_DEFAULT_ENTRY'
+    });
+}
+export const makeProjectEnable = ( projectId ) => dispatch => {
+    axios.put(SERVER_ADDRESS + '/project/enable', projectId, {
+        headers:{
+             'Content-Type': 'text/plain'
         }
     });
 }

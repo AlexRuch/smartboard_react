@@ -1,7 +1,8 @@
 import React from 'react';
 import ProjectsListComponent from '../components/admin/projectsList';
+import Header from '../components/header/header';
 import { connect } from 'react-redux';
-import { loadProjects, createProject, sortByCreate, sortByUpdate } from '../actions/projects';
+import { loadProjects, deleteProject, createProject, sortByCreate, sortByUpdate, makeProjectEnable } from '../actions/projects';
 
 
 class Admin extends React.Component {
@@ -13,10 +14,15 @@ class Admin extends React.Component {
     render() {
         
         return (
+            <div>
+            <Header/>
             <ProjectsListComponent projectsList={this.props.projectsList}
                                    createProject={(projectName) => this.props.createProject(projectName)}
+                                   deleteProject={(projectId) => this.props.deleteProject(projectId)}
                                    sortByCreate={() => this.props.sortByCreate()}
-                                   sortByUpdate={() => this.props.sortByUpdate()}/>
+                                   sortByUpdate={() => this.props.sortByUpdate()}
+                                   makeProjectEnable={(projectId) => this.props.makeProjectEnable(projectId)} />
+            </div>
         );
     }
 }
@@ -33,6 +39,9 @@ function mapDispatchToProps(dispatch) {
         loadProjects: () => {
             dispatch(loadProjects())
         },
+        deleteProject: ( projectId ) => {
+            dispatch(deleteProject( projectId ))
+        },
         createProject: (projectName) => {
             dispatch(createProject(projectName));
         },
@@ -41,6 +50,9 @@ function mapDispatchToProps(dispatch) {
         },
         sortByUpdate: () => {
             dispatch(sortByUpdate());
+        },
+        makeProjectEnable: (projectId) => {
+            dispatch(makeProjectEnable(projectId));
         }
     }
 }

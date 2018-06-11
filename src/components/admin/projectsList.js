@@ -9,11 +9,22 @@ export default class Projects extends React.Component {
             newProjectName: ''
         };
         this.createProject = this.createProject.bind(this);
+        this.deleteProject = this.deleteProject.bind(this);
         this.changeHandler = this.changeHandler.bind(this);
+        this.makeProjectEnable = this.makeProjectEnable.bind(this);
     }
 
-    createProject(){
+    createProject() {
         this.props.createProject(this.state.newProjectName);
+    }
+
+    deleteProject(e) {
+        console.log(e.target.id);
+        this.props.deleteProject(e.target.id);
+    }
+
+    makeProjectEnable(e) {
+        this.props.makeProjectEnable(e.target.name);
     }
 
     changeHandler(e) {
@@ -22,17 +33,21 @@ export default class Projects extends React.Component {
     render() {
        
         const projects = this.props.projectsList.map(project => 
-                <li> 
-                    <Link to={ '/admin/project/' + project.projectId } className="proj-list__item">
+                <li key={project.projectId}> 
+                    <div className='proj-list__item'>
+                    <Link to={ '/admin/project/' + project.projectId }>
                         <div className="proj-list__left">
                             <h2 className="proj-list__title">{ project.projectName }</h2>
                             <p className="prj-list__description">{ project.projectDescription}</p>
                         </div>
-                        <div className="proj-list__right">
-                            <p className="proj-list__create">{ project.createDate }</p>
-                            <p className="proj-list__update">{ project.updateDate }</p>
-                        </div>
                     </Link>
+                        <div className="proj-list__right">
+                            <p className="proj-list__create">{ new Date(project.createDate).toLocaleString() }</p>
+                            <p className="proj-list__update">{ new Date(project.updateDate).toLocaleString() }</p>
+                            <button id={project.projectId} type='button' onClick={this.deleteProject}>Удалить</button>
+                            <button name={project.projectId} type='button' onClick={this.makeProjectEnable}>Вывести</button>
+                        </div>
+                    </div>
                 </li>
             );
 

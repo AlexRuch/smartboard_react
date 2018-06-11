@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class EntryPreview extends React.Component {
     render() {
-        const SERVER_ADDRESS = 'http://localhost:8080'
+        const SERVER_ADDRESS = 'http://192.168.10.126:8080'
         if(this.props.currentEntry !== undefined){
             if(this.props.currentEntry.contentType === 'TEXT'){
                 return(
@@ -40,7 +40,7 @@ export default class EntryPreview extends React.Component {
         } else {
         return(
             <div className='slide__clear'>
-                ВЫБЕРИТЕ СЛАЙД БЛЕТ!
+                ВЫБЕРИТЕ СЛАЙД
             </div>
         );
 

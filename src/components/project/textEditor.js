@@ -12,6 +12,9 @@ export default class TextEditor extends React.Component {
         this.changeHandler = this.changeHandler.bind(this);
     }
 
+    componentDidMount(){
+    }
+
     addText() {
         this.props.addText(this.props.project.projectId, this.state.entryName, this.state.entryText);
     }
@@ -30,7 +33,7 @@ export default class TextEditor extends React.Component {
                     </label>
                     <label className="form__item">
                         <span className="form__label">Текст</span>
-                            <textarea className="form__textarea" name="entryText" rows="10" placeholder="Текст" value={this.state.entryText} onChange={this.changeHandler}></textarea>
+                          <textarea className="form__textarea" name="entryText" rows="10" placeholder="Текст" value={this.state.entryText} onChange={this.changeHandler}></textarea>
                     </label>
                     <button className="form__submit" type="button" onClick={this.addText}>Отправить</button>
                 </form>

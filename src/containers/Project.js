@@ -6,6 +6,7 @@ import ProjectHeader from '../components/project/projectHeader';
 import TextEditor from '../components/project/textEditor';
 import TeableEditor from '../components/project/tableEditor';
 import ImageEditor from '../components/project/imageEditor';
+import Header from '../components/header/header';
 import { changeEntryPosition, loadProject, addText, addImage, addTable, deleteEntry, setCurrentEntry } from '../actions/projects.js';
 
 class Project extends React.Component {
@@ -17,6 +18,7 @@ class Project extends React.Component {
     render() {
             return(
                 <main>
+                    <Header/>
                     <section className="project">
                         <ProjectHeader project={this.props.project}/>
                         <div className="project__slide slide">

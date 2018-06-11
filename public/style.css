@@ -738,6 +738,11 @@ body {
     margin: 30px auto auto;
 }
 
+.proj-list__item a{
+    text-decoration: none;
+    color: #000000;
+}
+
 .proj-list__item {
     display: flex;
     justify-content: space-between;
@@ -819,4 +824,38 @@ body {
     font-size: 48px;
     width: 600px;
     min-height: 400px;
+}
+
+header {
+    height: 150px;
+    background: #1e51a4 url(img/itmo.png) center;
+    background-size: 150px;
+    background-repeat: no-repeat;
+}
+
+header a{
+    display: block;
+    height: 100%;
+    cursor: pointer;
+}
+
+.boardMonitor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 60px;
+}
+
+.boardMonitor img{
+    object-fit: cover;
+    height: 100vh;
+    width: 100vw;
+}
+.boardMonitor__table {
+    width: 100%;
+}
+
+.boardMonitor__table ul{
+    width: 100%;
 }
