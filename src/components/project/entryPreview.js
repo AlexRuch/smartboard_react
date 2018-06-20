@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class EntryPreview extends React.Component {
     render() {
-        const SERVER_ADDRESS = 'http://192.168.10.126:8080'
+        const SERVER_ADDRESS = 'http://85.95.146.73:8080'
         if(this.props.currentEntry !== undefined){
             if(this.props.currentEntry.contentType === 'TEXT'){
                 return(

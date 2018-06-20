@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const SERVER_ADDRESS = 'http://192.168.10.126:8080/api';
+const SERVER_ADDRESS = 'http://85.95.146.73:8080/api';
 
 export const loadProjects = () => dispatch => {
     axios.get(SERVER_ADDRESS + '/project/all').then(response => {

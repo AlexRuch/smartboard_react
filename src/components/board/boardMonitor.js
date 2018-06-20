@@ -50,7 +50,7 @@ export default class BoardMonitor extends React.Component {
             return(
                 <div className='boardMonitor'>
                     <img alt={this.props.enableProject.entryList[this.props.boardEntry].entryName} 
-                        className='BoardMonitor__image' src={'http://192.168.10.126:8080/' + this.props.enableProject.entryList[this.props.boardEntry].imagePath}/>
+                        className='BoardMonitor__image' src={'http://85.95.146.73:8080/' + this.props.enableProject.entryList[this.props.boardEntry].imagePath}/>
                 </div>
             );
         } else if (this.props.enableProject.entryList[this.props.boardEntry].contentType === 'TABLE'){

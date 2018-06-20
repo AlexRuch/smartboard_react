@@ -5,7 +5,7 @@ import BoardMonitor from '../components/board/boardMonitor';
 
 class Board extends React.Component {
     componentWillMount() {
-        const SERVER_ADDRESS = 'http://192.168.10.126:8080';
+        const SERVER_ADDRESS = 'http://85.95.146.73:8080';
         const eventSource = new EventSource(SERVER_ADDRESS + '/live/update');
         eventSource.onopen = function (e) {
                     console.log("Соединение открыто");
